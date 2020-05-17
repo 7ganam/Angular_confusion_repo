@@ -11,7 +11,7 @@ import { Comment } from '../shared/comment';
 export class DishdetailComponent implements OnInit {
   @Input()
   dish: Dish;
-s  constructor() { }
+  constructor() { }
 
   ngOnInit() {
   }
