@@ -37,8 +37,8 @@
     <div class="container"
       fxLayout="column"
       fxLayoutGap="10px">
-      <mat-list fxFlex>
-        <mat-list-item *ngFor="let c of coms">
+      <mat-list fxFlex *ngIf="dish">
+        <mat-list-item *ngFor="let c of dish.comments">
           <p matLine> {{c.comment}} </p>
           <p matLine> {{c.rating}} stars </p>
           <p matLine> -- {{c.author}}  {{c.date | date }} </p>
