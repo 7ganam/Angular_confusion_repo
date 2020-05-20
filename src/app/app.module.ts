@@ -41,6 +41,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatSliderModule} from '@angular/material/slider';
 import {formatDate} from '@angular/common';
 
+import { HttpClientModule } from '@angular/common/http';
+import { baseURL } from './shared/baseurl';
+import {ProcessHTTPMsgService } from './services/process-httpmsg.service';
+import {HttpHeaders } from '@angular/common/http';
+import { HighlightDirective } from './directives/highlight.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,9 +57,11 @@ import {formatDate} from '@angular/common';
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
+    HttpClientModule,
     MatSliderModule,
     MatSelectModule,
     MatSlideToggleModule,
@@ -77,7 +85,7 @@ import {formatDate} from '@angular/common';
 
   ],
   entryComponents: [LoginComponent],
-  providers: [LeaderService ,DishService, PromotionService],
+  providers: [LeaderService ,DishService, PromotionService,  {provide: 'BaseURL', useValue: baseURL},ProcessHTTPMsgService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

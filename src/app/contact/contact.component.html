@@ -38,9 +38,13 @@
 
     <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
-    <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
 
-    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+
+    <!-- <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }} {{ show_response | json }}</p> -->
+
+
+
+    <form novalidate  [hidden]="show_form == false" [@visibility]="visibility2" [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field class="half-width">
           <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
@@ -61,7 +65,40 @@
           <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
         </mat-form-field>
       </p>
+      <table class="form-size">
+        <td>
+          <mat-slide-toggle  formControlName="agree">May we contact you?</mat-slide-toggle>
+        </td>
+        <td>
+          <mat-select placeholder="How?" formControlName="contacttype">
+            <mat-option *ngFor="let ctype of contactType" [value]="ctype">
+              {{ ctype }}
+            </mat-option>
+          </mat-select>
+        </td>
+        </table>
+      <p>
+        <mat-form-field class="full-width">
+          <textarea matInput formControlName="message" placeholder="Your Feedback" rows=12></textarea>
+        </mat-form-field>
+      </p>
       <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
     </form>
+
+    <div [hidden]="show_spiner == false">
+      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
+
+    <div [hidden]="show_response == false" [@visibility]="visibility"  >
+      <h3>your response</h3>
+      <h4>First name: {{res_firstname}}</h4>
+      <h4>last name: {{res_lastname}}</h4>
+      <h4>tel: {{res_telnum}}</h4>
+      <h4>email: {{res_email}}</h4>
+      <h4>contact you?: {{res_agree}}</h4>
+      <h4>How?: {{res_contacttype}}</h4>
+      <h4>message: {{res_message}}</h4>
+    </div>
+
   </div>
 </div>

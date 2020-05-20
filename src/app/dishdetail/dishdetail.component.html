@@ -6,7 +6,7 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
-  <div fxFlex="40">
+    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
  
 
     <div fxFlex *ngIf="dish">
@@ -16,22 +16,26 @@
             <h3 *ngIf="dish">{{dish.name | uppercase}}</h3>
           </mat-card-title>
         </mat-card-header>
-        <img mat-card-image src={{dish.image}} alt={{dish.name}}>
+
+        <img mat-card-image src="{{ BaseURL + dish.image }}" alt={{dish.name}}>
         <mat-card-content>
           <p>{{dish.description}}
           </p>
         </mat-card-content>
         <mat-card-actions>
+          <button mat-button [routerLink]="['/dishdetail', prev]"><span class="fa fa-chevron-left fa-lg"></span></button>
           <button mat-button (click)="goBack()">BACK</button>
           <button mat-button>LIKE</button>
           <button mat-button>SHARE</button>
+          <span class="flex-spacer"></span>
+          <button mat-button [routerLink]="['/dishdetail', next]"><span class="fa fa-chevron-right fa-lg"></span></button>
         </mat-card-actions>
       </mat-card>
     </div>
     </div>
 
-  <div fxFlex="40">
-    <div>
+    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
+      <div>
       <h3>Comments</h3>
     </div>
 
@@ -45,11 +49,11 @@
           <p matLine> -- {{c.author}}  {{c.date | date }} </p>
         </mat-list-item>
 
-        <mat-list-item *ngIf="submitted">
+        <!-- <mat-list-item *ngIf="submitted">
           <p matLine> {{new_comment}} </p>
           <p matLine> {{new_rating}} stars </p>
           <p matLine> -- {{new_author}} {{mo}} {{da}} ,{{ye}} </p>
-        </mat-list-item>
+        </mat-list-item> -->
 
       </mat-list>
     </div>
